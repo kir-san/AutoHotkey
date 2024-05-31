@@ -1,37 +1,37 @@
 #SingleInstance force
+#Include "SimpleGui.ahk"
 
-title := "WinAtaman"
+mainWindow := SimpleGui("WinAtaman")
 
-mygui := Gui("AlwaysOnTop -SysMenu -ToolWindow", title)
-
-mygui.Add("Text", ,"T - terminal")
-mygui.Add("Text", ,"S - Sublime Text")
-mygui.Add("Text", ,"E - Edit programm code")
-mygui.Add("Text", ,"Esc - Close window")
-
-#v:: {
-    mygui.Show()
+mainWindow.AddCommand("T - terminal")
+#HotIf mainWindow.IsShow
+t:: {
+    mainWindow.Hide()
+    Run("C:\Users\kir-san\AppData\Local\Microsoft\WindowsApps\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\wt.exe")
 }
 
-#HotIf WinExist(title)
+mainWindow.AddCommand("S - Sublime Text")
+#HotIf mainWindow.IsShow
+s:: {
+    mainWindow.Hide()
+    Run("C:\Program Files\Sublime Text\sublime_text.exe")
+}
+
+mainWindow.AddCommand("E - Edit programm code")
+#HotIf mainWindow.IsShow
+e:: {
+    mainWindow.Hide()
+    Run("code.cmd")
+}
+
+mainWindow.AddCommand("Esc - Close window")
+#HotIf mainWindow.IsShow
 Esc:: {
-    mygui.Hide()
+    mainWindow.Hide()
 }
 
-#HotIf WinExist(title)
-t::{
-    mygui.Hide()
-    Run "C:\Users\kir-san\AppData\Local\Microsoft\WindowsApps\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\wt.exe"
-}
 
-#HotIf WinExist(title)
-s::{
-    mygui.Hide()
-    Run "C:\Program Files\Sublime Text\sublime_text.exe"
-}
-
-#HotIf WinExist(title)
-e::{
-    mygui.Hide()
-    Run "code.cmd D:\Projects\AutoHotkey\test.ahk"
+AppsKey & v:: {
+    if (!mainWindow.IsShow)
+        mainWindow.Show()
 }
