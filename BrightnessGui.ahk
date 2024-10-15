@@ -1,14 +1,10 @@
-class SimpleGui {
+class BrightnessGui {
 
     IsShow := false
 
-    __New(title) {
-        this.Instance := Gui("AlwaysOnTop -SysMenu -ToolWindow", title)
+    __New() {
+        this.Instance := Gui("AlwaysOnTop -SysMenu -ToolWindow", "Brightness Controll")
         this.timer := ObjBindMethod(this, "Hide")
-    }
-
-    AddCommand(text) {
-        this.Instance.AddText(, text)
     }
 
     Show() {
